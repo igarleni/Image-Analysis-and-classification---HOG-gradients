@@ -5,6 +5,8 @@ ehthumbs.db
 # Folder config file
 Desktop.ini
 
+#Data file cant be uploaded, filename too long
+
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
