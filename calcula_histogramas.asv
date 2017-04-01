@@ -40,7 +40,7 @@ function histogramas = calcula_histogramas(magnitud,orientacion)
     histogramas = zeros(8,8,9);
     for i = 2:imSize(1)
         for j = 2:imSize(2)
-            %see pixel intervals weights and add into his group
+            %reco
         end
     end
     
