@@ -6,7 +6,8 @@ ehthumbs.db
 Desktop.ini
 
 #Data file cant be uploaded, filename too long
-data/
+train/
+test/
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/

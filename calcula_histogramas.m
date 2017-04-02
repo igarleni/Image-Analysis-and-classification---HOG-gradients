@@ -10,7 +10,8 @@ function histogramas = calcula_histogramas(magnitud,orientacion)
     
     imSize = size(magnitud);
     
-    %3 data each pixel: main interval ID, neighbor ID and weight to main interval
+    %pixelData: 3 data each pixel 128x64x3 [main interval ID, neighbor ID, weight to
+    %main interval]
     %(weigh to neighbor = 1 - weightMain
     pixelData = zeros(imSize(1),imSize(2),3);
     
@@ -19,7 +20,7 @@ function histogramas = calcula_histogramas(magnitud,orientacion)
     imSize(1) = imSize(1) - 1;
     imSize(2) = imSize(2) - 1;
     
-    %transform direction to invervals
+    %transform direction to invervals and save it on pixelData
     for i = 2:imSize(1)
         for j = 2:imSize(2)
             ratio = abs(orientacion(i,j))/20;
