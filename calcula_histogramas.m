@@ -49,8 +49,8 @@ function histogramas = calcula_histogramas(magnitud,orientacion)
             cellCenterY = indexYcell*8 - 4;
             influenceX = abs(cellCenterX - i) / 8;
             influenceY = abs(cellCenterY - j) / 8;
-            histogramas(indexXcell, indexYcell, pixelData(i,j,1)+1) = histogramas(indexXcell, indexYcell, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * influenceX;
-            histogramas(indexXcell, indexYcell, pixelData(i,j,2)+1) = histogramas(indexXcell, indexYcell, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * influenceY;
+            histogramas(indexXcell, indexYcell, pixelData(i,j,1)+1) = histogramas(indexXcell, indexYcell, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * influenceX * influenceY;
+            histogramas(indexXcell, indexYcell, pixelData(i,j,2)+1) = histogramas(indexXcell, indexYcell, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * influenceX * influenceY;
             %Neighbor cells
             if ((cellCenterX - i) > 0)
                 if ((cellCenterY - j) > 0)
@@ -60,16 +60,16 @@ function histogramas = calcula_histogramas(magnitud,orientacion)
                         neighborY = indexYcell - 1;
                         neighborCenterY = neighborY*8 - 4;
                         neighborInfluenceY = abs(neighborCenterY - j) / 8;
-                        histogramas(indexXcell, neighborY, pixelData(i,j,1)+1) = histogramas(indexXcell, neighborY, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * influenceX;
-                        histogramas(indexXcell, neighborY, pixelData(i,j,2)+1) = histogramas(indexXcell, neighborY, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * neighborInfluenceY;
+                        histogramas(indexXcell, neighborY, pixelData(i,j,1)+1) = histogramas(indexXcell, neighborY, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * influenceX * neighborInfluenceY;
+                        histogramas(indexXcell, neighborY, pixelData(i,j,2)+1) = histogramas(indexXcell, neighborY, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * influenceX * neighborInfluenceY;
                     end
                     if (indexXcell > 1)
                         %(i-1,j)
                         neighborX = indexXcell - 1;
                         neighborCenterX = neighborX*8 - 4;
                         neighborInfluenceX = abs(neighborCenterX - j) / 8;
-                        histogramas(neighborX, indexYcell, pixelData(i,j,1)+1) = histogramas(neighborX, indexYcell, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * neighborInfluenceX;
-                        histogramas(neighborX, indexYcell, pixelData(i,j,2)+1) = histogramas(neighborX, indexYcell, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * influenceY;
+                        histogramas(neighborX, indexYcell, pixelData(i,j,1)+1) = histogramas(neighborX, indexYcell, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * neighborInfluenceX * influenceY;
+                        histogramas(neighborX, indexYcell, pixelData(i,j,2)+1) = histogramas(neighborX, indexYcell, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * neighborInfluenceX * influenceY;
                     end
                     if((indexXcell > 1) && (indexYcell > 1))
                         %(i-1,j-1)
@@ -79,8 +79,8 @@ function histogramas = calcula_histogramas(magnitud,orientacion)
                         neighborX = indexXcell - 1;
                         neighborCenterX = neighborX*8 - 4;
                         neighborInfluenceX = abs(neighborCenterX - j) / 8;
-                        histogramas(neighborX, neighborY, pixelData(i,j,1)+1) = histogramas(neighborX, neighborY, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * neighborInfluenceX;
-                        histogramas(neighborX, neighborY, pixelData(i,j,2)+1) = histogramas(neighborX, neighborY, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * neighborInfluenceY;
+                        histogramas(neighborX, neighborY, pixelData(i,j,1)+1) = histogramas(neighborX, neighborY, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * neighborInfluenceX * neighborInfluenceY;
+                        histogramas(neighborX, neighborY, pixelData(i,j,2)+1) = histogramas(neighborX, neighborY, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * neighborInfluenceX * neighborInfluenceY;
                     end
                 else
                     %cuadrante arriba izquierda
@@ -89,16 +89,16 @@ function histogramas = calcula_histogramas(magnitud,orientacion)
                         neighborY = indexYcell + 1;
                         neighborCenterY = neighborY*8 - 4;
                         neighborInfluenceY = abs(neighborCenterY - j) / 8;
-                        histogramas(indexXcell, neighborY, pixelData(i,j,1)+1) = histogramas(indexXcell, neighborY, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * influenceX;
-                        histogramas(indexXcell, neighborY, pixelData(i,j,2)+1) = histogramas(indexXcell, neighborY, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * neighborInfluenceY;
+                        histogramas(indexXcell, neighborY, pixelData(i,j,1)+1) = histogramas(indexXcell, neighborY, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * influenceX * neighborInfluenceY;
+                        histogramas(indexXcell, neighborY, pixelData(i,j,2)+1) = histogramas(indexXcell, neighborY, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * influenceX * neighborInfluenceY;
                     end
                     if (indexXcell > 1)
                         %(i-1,j)
                         neighborX = indexXcell - 1;
                         neighborCenterX = neighborX*8 - 4;
                         neighborInfluenceX = abs(neighborCenterX - j) / 8;
-                        histogramas(neighborX, indexYcell, pixelData(i,j,1)+1) = histogramas(neighborX, indexYcell, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * neighborInfluenceX;
-                        histogramas(neighborX, indexYcell, pixelData(i,j,2)+1) = histogramas(neighborX, indexYcell, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * influenceY;
+                        histogramas(neighborX, indexYcell, pixelData(i,j,1)+1) = histogramas(neighborX, indexYcell, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * neighborInfluenceX * influenceY;
+                        histogramas(neighborX, indexYcell, pixelData(i,j,2)+1) = histogramas(neighborX, indexYcell, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j)* neighborInfluenceX * influenceY;
                     end
                     if((indexXcell > 1) && (indexYcell < histSize(2)))
                         %(i-1,j+1)
@@ -108,8 +108,8 @@ function histogramas = calcula_histogramas(magnitud,orientacion)
                         neighborX = indexXcell - 1;
                         neighborCenterX = neighborX*8 - 4;
                         neighborInfluenceX = abs(neighborCenterX - j) / 8;
-                        histogramas(neighborX, neighborY, pixelData(i,j,1)+1) = histogramas(neighborX, neighborY, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * neighborInfluenceX;
-                        histogramas(neighborX, neighborY, pixelData(i,j,2)+1) = histogramas(neighborX, neighborY, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * neighborInfluenceY;
+                        histogramas(neighborX, neighborY, pixelData(i,j,1)+1) = histogramas(neighborX, neighborY, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * neighborInfluenceX * neighborInfluenceY;
+                        histogramas(neighborX, neighborY, pixelData(i,j,2)+1) = histogramas(neighborX, neighborY, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * neighborInfluenceX * neighborInfluenceY;
                     end
                 end
             else
@@ -120,16 +120,16 @@ function histogramas = calcula_histogramas(magnitud,orientacion)
                         neighborY = indexYcell - 1;
                         neighborCenterY = neighborY*8 - 4;
                         neighborInfluenceY = abs(neighborCenterY - j) / 8;
-                        histogramas(indexXcell, neighborY, pixelData(i,j,1)+1) = histogramas(indexXcell, neighborY, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * influenceX;
-                        histogramas(indexXcell, neighborY, pixelData(i,j,2)+1) = histogramas(indexXcell, neighborY, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * neighborInfluenceY;
+                        histogramas(indexXcell, neighborY, pixelData(i,j,1)+1) = histogramas(indexXcell, neighborY, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * influenceX * neighborInfluenceY;
+                        histogramas(indexXcell, neighborY, pixelData(i,j,2)+1) = histogramas(indexXcell, neighborY, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * influenceX * neighborInfluenceY;
                     end
                     if (indexXcell < histSize(1))
                         %(i+1,j)
                         neighborX = indexXcell + 1;
                         neighborCenterX = neighborX*8 - 4;
                         neighborInfluenceX = abs(neighborCenterX - j) / 8;
-                        histogramas(neighborX, indexYcell, pixelData(i,j,1)+1) = histogramas(neighborX, indexYcell, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * neighborInfluenceX;
-                        histogramas(neighborX, indexYcell, pixelData(i,j,2)+1) = histogramas(neighborX, indexYcell, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * influenceY;
+                        histogramas(neighborX, indexYcell, pixelData(i,j,1)+1) = histogramas(neighborX, indexYcell, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * neighborInfluenceX * influenceY;
+                        histogramas(neighborX, indexYcell, pixelData(i,j,2)+1) = histogramas(neighborX, indexYcell, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * neighborInfluenceX * influenceY;
                     end
                     if((indexXcell < histSize(1)) && (indexYcell > 1))
                         %(i+1,j-1)
@@ -139,8 +139,8 @@ function histogramas = calcula_histogramas(magnitud,orientacion)
                         neighborX = indexXcell + 1;
                         neighborCenterX = neighborX*8 - 4;
                         neighborInfluenceX = abs(neighborCenterX - j) / 8;
-                        histogramas(neighborX, neighborY, pixelData(i,j,1)+1) = histogramas(neighborX, neighborY, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * neighborInfluenceX;
-                        histogramas(neighborX, neighborY, pixelData(i,j,2)+1) = histogramas(neighborX, neighborY, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * neighborInfluenceY;
+                        histogramas(neighborX, neighborY, pixelData(i,j,1)+1) = histogramas(neighborX, neighborY, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * neighborInfluenceX * neighborInfluenceY;
+                        histogramas(neighborX, neighborY, pixelData(i,j,2)+1) = histogramas(neighborX, neighborY, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * neighborInfluenceX * neighborInfluenceY;
                     end
                 else
                     %cuadrante arriba derecha
@@ -149,16 +149,16 @@ function histogramas = calcula_histogramas(magnitud,orientacion)
                         neighborY = indexYcell + 1;
                         neighborCenterY = neighborY*8 - 4;
                         neighborInfluenceY = abs(neighborCenterY - j) / 8;
-                        histogramas(indexXcell, neighborY, pixelData(i,j,1)+1) = histogramas(indexXcell, neighborY, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * influenceX;
-                        histogramas(indexXcell, neighborY, pixelData(i,j,2)+1) = histogramas(indexXcell, neighborY, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * neighborInfluenceY;
+                        histogramas(indexXcell, neighborY, pixelData(i,j,1)+1) = histogramas(indexXcell, neighborY, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * influenceX * neighborInfluenceY;
+                        histogramas(indexXcell, neighborY, pixelData(i,j,2)+1) = histogramas(indexXcell, neighborY, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * influenceX * neighborInfluenceY;
                     end
                     if (indexXcell < histSize(1))
                         %(i+1,j)
                         neighborX = indexXcell + 1;
                         neighborCenterX = neighborX*8 - 4;
                         neighborInfluenceX = abs(neighborCenterX - j) / 8;
-                        histogramas(neighborX, indexYcell, pixelData(i,j,1)+1) = histogramas(neighborX, indexYcell, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * neighborInfluenceX;
-                        histogramas(neighborX, indexYcell, pixelData(i,j,2)+1) = histogramas(neighborX, indexYcell, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * influenceY;
+                        histogramas(neighborX, indexYcell, pixelData(i,j,1)+1) = histogramas(neighborX, indexYcell, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * neighborInfluenceX * influenceY;
+                        histogramas(neighborX, indexYcell, pixelData(i,j,2)+1) = histogramas(neighborX, indexYcell, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * neighborInfluenceX * influenceY;
                     end
                     if((indexXcell < histSize(1)) && (indexYcell < histSize(2)))
                         %(i+1,j+1)
@@ -168,8 +168,8 @@ function histogramas = calcula_histogramas(magnitud,orientacion)
                         neighborX = indexXcell + 1;
                         neighborCenterX = neighborX*8 - 4;
                         neighborInfluenceX = abs(neighborCenterX - j) / 8;
-                        histogramas(neighborX, neighborY, pixelData(i,j,1)+1) = histogramas(neighborX, neighborY, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * neighborInfluenceX;
-                        histogramas(neighborX, neighborY, pixelData(i,j,2)+1) = histogramas(neighborX, neighborY, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * neighborInfluenceY;
+                        histogramas(neighborX, neighborY, pixelData(i,j,1)+1) = histogramas(neighborX, neighborY, pixelData(i,j,1)+1) + pixelData(i,j,3) * magnitud(i,j) * neighborInfluenceX * neighborInfluenceY;
+                        histogramas(neighborX, neighborY, pixelData(i,j,2)+1) = histogramas(neighborX, neighborY, pixelData(i,j,2)+1) + (1 - pixelData(i,j,3))* magnitud(i,j) * neighborInfluenceX * neighborInfluenceY;
                     end
                 end
             end
