@@ -9,6 +9,12 @@ Desktop.ini
 train/
 test/
 
+#Rstudio data
+.Rproj.user/
+.RData
+.Rhistory
+*Rproj
+
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
 
